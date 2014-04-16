@@ -1,0 +1,9 @@
+// qinv.sci invert a unjit-quaternion
+// www.controlsystemslab.com  Sep 2012
+
+function qi = qinv(q)
+    nq = size(q,1);
+    if nq==1 then
+        qi
+    end
+endfunction
