@@ -1,29 +1,12 @@
-//PlotRobot.sci  sketch a robot manipulator in 3-D
+// PlotRobot.sci sketch a robot manipulator in 3-D
 // www.controlsystemslab.com   July 2012
 
-function [T]=plotrobot(robot,q,varargin)
-    if argn(2)==0 then
-        PlotRobotHelp();
-        T=[];
-    else
-        
-        T = _Plot_Robot(robot,q,varargin);
-    end    
-
-endfunction
-
-function [T]=PlotRobot(robot,q,varargin)
-    if argn(2)==0 then
-        PlotRobotHelp();
-        T=[];
-    else
-        
-        T = _Plot_Robot(robot,q,varargin);
-    end    
-endfunction
-
-
 function [T]=_Plot_Robot(robot,q, varargin)
+// where robot is the robot model to plot with joint variable q
+// q must be a 1 x nj vector, where nj = number of joints of robot
+// Available options: (put string in quotes)
+// grid: add grid to plot <figure, i>: plot on window number i
+// 
     varargin=varargin($);
     ShowGrid = 0;  // default plot to no grid
     // retrieve variable arguments
@@ -387,3 +370,19 @@ function PlotRobotHelp()
         printf("=============================================================\n");
 endfunction
 
+function [T]=PlotRobot(robot,q,varargin)
+// where robot is the robot model to plot with joint variable q
+// q must be a 1 x nj vector, where nj = number of joints of robot
+// Available options: (put string in quotes)
+// grid: add grid to plot <figure, i>: plot on window number i
+// 
+
+    if argn(2)==0 then
+        PlotRobotHelp();
+        T=[];
+    else
+        T = _Plot_Robot(robot,q,varargin);
+    end    
+endfunction
+
+plotrobot = PlotRobot;

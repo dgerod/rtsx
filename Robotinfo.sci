@@ -4,6 +4,8 @@
 // where robot is a robot data structure created from SerialLink()
 
 function robotinfo(robot)
+// where robot is a robot data structure created from SerialLink()
+//
     if (robot.name=='') then name="N/A";
     else name=robot.name;  
     end
@@ -44,10 +46,5 @@ function robotinfo(robot)
     
 endfunction
 
-function Robotinfo(robot)
-    robotinfo(robot);
-endfunction
-
-function RobotInfo(robot)
-    robotinfo(robot);
-endfunction
+Robotinfo = robotinfo;
+RobotInfo = robotinfo;

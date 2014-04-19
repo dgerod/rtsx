@@ -1,6 +1,7 @@
 // SerialLink.sci creates a SerialLink robot structure
 // www.controlsystemslab.com  July 2012
-//
+
+function rm = _Serial_Link (L,varargin)
 // Parameters
 // Link(i)      Link structure (inherited from L)
 //  gravity    direction of gravity [gx gy gz]
@@ -14,17 +15,8 @@
 //  mdh         kinematic convention boolean (0=DH, 1=MDH)
 //
 // Usage: RM = SerialLink(L, options)
-
-function rm=seriallink(L,varargin)
-    rm=_Serial_Link(L,varargin);
-endfunction
-
-function rm=SerialLink(L,varargin)
-    rm=_Serial_Link(L,varargin);
-endfunction
-
-function rm=_Serial_Link(L,varargin)
-    varargin = varargin($);
+//
+     varargin = varargin($);
      varnum=length(varargin);
      sdhflag = 0;        // flag for stdDH
      mdhflag = 0;        // flag for modDH
@@ -106,3 +98,5 @@ function rm=_Serial_Link(L,varargin)
         end // if pmodulo(varnum,2)
 endfunction
 
+seriallink = _Serial_Link;
+SerialLink = _Serial_Link;

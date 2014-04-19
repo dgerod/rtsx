@@ -1,16 +1,9 @@
-// SerialFrame.sci  construct a chain of coordinate frame
+// SerialFrame.sci construct a chain of coordinate frame
 // computing missing information if possible
 // www.controlsystemslab.com   August 2012
 
-function sf=SerialFrame(F,varargin)
-    sf=_Serial_Frame(F,varargin);
-endfunction
-
-function sf=serialframe(F,varargin)
-    sf = _Serial_Frame(F,varargin);
-endfunction
-
-function sf=_Serial_Frame(F,varargin)
+function sf = _Serial_Frame(F, varargin)
+   
     varargin = varargin($);
     varnum=length(varargin); 
     printf("\nReading frame data and computing missing information\n");    
@@ -152,3 +145,6 @@ function sf=_Serial_Frame(F,varargin)
         end      // if CompleteCount == nframes    
         //pause;   
 endfunction
+
+SerialFrame = _Serial_Frame;
+serialframe = _Serial_Frame;

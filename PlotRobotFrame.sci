@@ -1,4 +1,4 @@
-//PlotRobotFrame.sci  sketch a robot frame structure in 3-D
+// PlotRobotFrame.sci  sketch a robot frame structure in 3-D
 // www.controlsystemslab.com   July 2012
 
 function [T]=plotrobotframe(robot,q,varargin)
