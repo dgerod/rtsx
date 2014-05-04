@@ -1,9 +1,13 @@
+// =====================================================================
 // isspherical.sci   Test for a spherical wrist
 // www.controlsystemslab.com   August 2012
+// =====================================================================
+
+function v = isspherical (robot) 
 // R.isspherical() is true if the robot has a spherical wrist, that is, the 
 // last 3 axes are revolute and their axes intersect at a point.
+//
 
-function v = isspherical(robot) 
     nj = robot.nj;
     L = robot.Link(nj-2:nj);
     v = 0;
@@ -15,3 +19,5 @@ function v = isspherical(robot)
         v = 1;
     end
 endfunction
+
+// =====================================================================

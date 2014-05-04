@@ -1,35 +1,27 @@
+// =====================================================================
 // PlotResolveFrame.sci  plot 2 closed-loop chains of coordinate frames and 
 // solve for missing link
 // www.controlsystemslab.com  August 2012
+// =====================================================================
 
+function [T_rel,T_abs,kc1] = _Plot_Resolve_Frame (kc1,kc2, varargin)
 
-function [T_rel,T_abs,kc1]=plotresolveframe(kc1,kc2, varargin)
-    if argn(2)==0
-        PlotResolveFrameHelp();
-    else 
-        [T_rel,T_abs,kc1]=_Plot_Resolve_Frame(kc1,kc2, varargin);
+    // Check if inputs are variable or not ---
+    if argn(2) > 1 then        
+        varargin = varargin($);
+        varnum = length(varargin);
+    else
+        varargin = [];
+        varnum = 0;
     end
-endfunction
+    // ---
 
-function [T_rel,T_abs,kc1]=PlotResolveFrame(kc1,kc2, varargin)
-    if argn(2)==0
-        PlotResolveFrameHelp();
-    else 
-        [T_rel,T_abs,kc1]=_Plot_Resolve_Frame(kc1,kc2, varargin);
-    end
-endfunction
-
-function [T_rel,T_abs,kc1]=_Plot_Resolve_Frame(kc1,kc2, varargin)
-    
-
-    varargin = varargin($);
     ShowGrid = 0;  // default plot to no grid
     ShowOrigin = 0; // default: no origin location display
     missingframe = 0;  // keep missing frame number of kc1
     font_color = 1;   // axis label color
     // retrieve variable arguments
     fnum = max(winsid())+1;
-    varnum=length(varargin);  // number of arguments
     
     for iv =1:varnum
         if varargin(iv)=='grid' then
@@ -323,7 +315,10 @@ function [T_rel,T_abs,kc1]=_Plot_Resolve_Frame(kc1,kc2, varargin)
         disp(T_rel);
         printf("\n\n");
     end
+
 endfunction    
+
+// ---------------------------------------------------------------------
 
 function PlotResolveFrameHelp()
         printf("=============================================================\n");    
@@ -337,3 +332,10 @@ function PlotResolveFrameHelp()
         printf("\toinfo: show origin coordinates\n");
         printf("=============================================================\n");        
 endfunction        
+
+// ---------------------------------------------------------------------
+
+plotresolveframe = _Plot_Resolve_Frame;
+PlotResolveFrame =_Plot_Resolve_Frame;
+
+// =====================================================================

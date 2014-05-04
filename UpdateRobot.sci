@@ -1,35 +1,32 @@
+// =====================================================================
 // UpdateRobot.sci   update robot data structure
 // www.controlsystemslab.com  July 2012
-// robot = UpdateRobot(robot,lindex,varargin) 
-// Example:
-// robot = UpdateRobot(robot,'link',1,'RP','R') // change link 1 to revolute
-
-function robot = UpdateRobot(robot,varargin)    
-    if argn(2)==0 then
-        UpdateRobotHelp();
-        robot=[];
-    else
-        
-        robot = _Update_Robot(robot,varargin);
-    end    
-endfunction 
-
-
-function robot = updaterobot(robot,varargin)    
-    if argn(2)==0 then
-        UpdateRobotHelp();
-        robot=[];
-    else
-        
-        robot = _Update_Robot(robot,varargin);
-    end    
-endfunction 
+// =====================================================================
 
 function robot = _Update_Robot(robot,varargin)
+// Usage: robot=UpdateRobot(robot,<param1, value1>,<param2,value2> ...)
+// where <parameter, value> pairs are (put all strings/characters in quotes)
+//
+// =====Set global robot parameters ====== 
+//    <name, robot_name>: set robot name
+//    <manuf, robot_manuf>: set robot manufacturer
+//    <viewangle, [valpha,vtheta]>: set robot view angle (in degrees)
+//    <base,[Tb]>: set base frame (4x4 homog matrix)of robot
+//    <tool,[Tt]>: set tool frame (4x4 homog matrix)of robot;
+//    <gravity,[rg]>: set robot gravity (3x1 vector)
+//
+// ======Set individual link=======
+//   <link, i>: link selection 
+//   <RP, R|P>: set link to revolute (R) or prismatic (P)
+//   <qlim,[min,max]>: set joint limit of selected link
+//   <linkparm,[theta d a alpha (offset)]>: set all link parameters of seleced link
+//   <dynparm,[r I m Jm G B Tc]>: set all dynamic link parameters of selected link
+//   <r|I|m|Jm|G|B|Tc,[value]>: set a dynamic link parameter of selected link
+//
 
-        varargin=varargin($);
-        lidx = 1;  // link index, default = 1
-        varnum=length(varargin);  // number of arguments
+        varargin = varargin($);
+        lidx = 1;                   // link index, default = 1
+        varnum = length(varargin);  // number of arguments
         
         if pmodulo(varnum,2) then  // number of arguments is odd. Error!
             error("Input argument number is odd. You must miss something!");
@@ -209,7 +206,7 @@ function robot = _Update_Robot(robot,varargin)
         robot.conf = robotcfg;   // update configuration string      
 endfunction
 
-   
+// ---------------------------------------------------------------------
 
 function UpdateRobotHelp()
         printf("=============================================================\n");    
@@ -232,3 +229,10 @@ function UpdateRobotHelp()
         printf("\t<r|I|m|Jm|G|B|Tc,[value]>: set a dynamic link parameter of selected link\n");
         printf("=============================================================\n");
 endfunction
+
+// ---------------------------------------------------------------------
+
+UpdateRobot = _Update_Robot;
+updaterobot = _Update_Robot;
+
+// =====================================================================

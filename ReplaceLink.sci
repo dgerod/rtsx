@@ -1,28 +1,18 @@
+// =====================================================================
 //ReplaceLink.sci  replace a robot link specified by li 
 // www.controlsystemslab.com   August 2012
 // usage: robot=ReplaceLink(robot,L,li);
 // Example: 
 // --> robot = ReplaceLink(robot,L, 2) // remove link 2 with L
-
-function robot=ReplaceLink(robot,L,li)
-    if argn(2)==0 then
-       ReplaceLinkHelp();
-        robot=[];
-    else
-        robot = _Replace_Link(robot,L,li);
-    end          
-endfunction
-
-function robot=replacelink(robot,L,li)
-    if argn(2)==0 then
-       ReplaceLinkHelp();
-        robot=[];
-    else
-        robot = _Replace_Link(robot,L,li);
-    end 
-endfunction
+// =====================================================================
     
-function robot=_Replace_Link(robot,L,li)
+function robot = _Replace_Link (robot,L,li)
+// Usage: robot=ReplaceLink(robot,L,li)
+// replace link li of a robot with L
+//   Ex: robot=ReplaceLink(robot,L,2); // replace link 2
+//
+        
+   
     if robot.mdh ~= L.mdh 
         if robot.mdh==0 printf("Robot model has standard DH parameters\n");
         else printf("Robot model has modified DH parameters\n");
@@ -56,6 +46,8 @@ function robot=_Replace_Link(robot,L,li)
     
 endfunction       
 
+// ---------------------------------------------------------------------
+    
 function ReplaceLinkHelp()
         printf("=============================================================\n");
         printf("Usage: robot=ReplaceLink(robot,L,li)\n\n");
@@ -63,3 +55,10 @@ function ReplaceLinkHelp()
         printf("\tEx: robot=ReplaceLink(robot,L,2); // replace link 2 \n");
         printf("=============================================================\n");
 endfunction
+
+// ---------------------------------------------------------------------
+
+ReplaceLink = _Replace_Link;
+replacelink = _Replace_Link;
+
+// =====================================================================

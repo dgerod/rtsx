@@ -1,5 +1,9 @@
+// =====================================================================
 // Robot2AT.sci find A and T matrices from a robot model
 // www.controlsystemslab.com   Nov 2012
+// =====================================================================
+
+function [A,T,Tb,Tt]=_Robot_2_AT (robot,q,varargin)
 // Robot2AT simply calls Link2AT
 // Options are 
 //  'all'  include base and tool transform
@@ -7,19 +11,12 @@
 //  'tool' include tool
 //  'none' no base/tool (default)
 // only homogeneous matrix T affected by options. A remains unchanged
+//
 
-function [A,T,Tb,Tt]=Robot2AT(robot,q,varargin)
-    [A,T,Tb,Tt]=_Robot_2_AT(robot,q,varargin)
-endfunction
-
-function [A,T,Tb,Tt]=robot2at(robot,q,varargin)
-    [A,T,Tb,Tt]=_Robot_2_AT(robot,q,varargin);
-endfunction
-
-function [A,T,Tb,Tt]=_Robot_2_AT(robot,q,varargin)
-    varargin=varargin($);
-    varnum=length(varargin);  // number of arguments
-    atchoice = 0;   // 0 = none, 1=w/base, 2=w/tool, 3 = all
+    varargin = varargin($);
+    varnum = length(varargin);  // number of arguments
+    atchoice = 0;               // 0=none, 1=w/base, 2=w/tool, 3=all
+    
     for iv =1:varnum
         if type(varargin(iv))==10 then  // string
             varargin(iv)=convstr(varargin(iv),'l');   // convert to lower case
@@ -43,11 +40,11 @@ function [A,T,Tb,Tt]=_Robot_2_AT(robot,q,varargin)
         end
     end    
     
-    
     L = robot.Link;
     [A,T]=Link2AT(L,q);
     Tb=robot.base;
     Tt=robot.tool;
+    
     select atchoice
     case 1
         T=robot.base*T;
@@ -56,5 +53,14 @@ function [A,T,Tb,Tt]=_Robot_2_AT(robot,q,varargin)
     case 3
         T=robot.base*T*robot.tool;
     end
+    
     T=clean(T);
+
 endfunction
+
+// ---------------------------------------------------------------------
+
+Robot2AT = _Robot_2_AT;
+robot2at = _Robot_2_AT;
+
+// =====================================================================

@@ -1,38 +1,35 @@
-//AnimateRobot.sci  show a movie of robot manipulator in 3-D
+// =====================================================================
+// AnimateRobot.sci - Show a movie of robot manipulator in 3-D
 // corresponding to a sequence of joint variables
 // www.controlsystemslab.com   July 2012
+// =====================================================================
 
-function animaterobot(robot,q,varargin)
-    if argn(2)==0 then
-        AnimateRobotHelp();
-       
+function _Animate_Robot (robot,q,varargin)
+// Usage: AnimateRobot(robot,qs,<options>)
+// where robot is the robot model to animate with joint variable sequence qs
+// qs must be a ns x nj vector, where ns = number of setpoints and nj = number of joints of robot
+// Available options: (put string in quotes)
+//    grid: add grid to plot
+//    <figure, i>: plot on window number i
+// 
+
+    // Check if inputs are variable or not ---
+    if argn(2) > 2 then        
+        varargin = varargin($);
+        varnum = length(varargin);
     else
-        
-         _Animate_Robot(robot,q,varargin);
-    end    
-
-endfunction
-
-function AnimateRobot(robot,q,varargin)
-    if argn(2)==0 then
-        AnimateRobotHelp();
-       
-    else
-        
-        _Animate_Robot(robot,q,varargin);
-    end    
-endfunction
-
-
-function _Animate_Robot(robot,q, varargin)
-    varargin=varargin($);
-    ShowGrid = 0;  // default plot to no grid
-    // retrieve variable arguments
+        varargin = [];
+        varnum = 0;
+    end
+    // ---
+    
+    ShowGrid = 0;              // default plot to no grid
+                               // retrieve variable arguments
     fnum = max(winsid())+1;
-    varnum=length(varargin);  // number of arguments
     aspeed = 10;
-    PlotWorld = 1;        // plot world and tool frame as default
+    PlotWorld = 1;             // plot world and tool frame as default
     PlotTool = 1;
+
     for iv =1:varnum
         if type(varargin(iv))==10 then  // string
             varargin(iv)=convstr(varargin(iv),'l');   // convert to lower case
@@ -451,18 +448,24 @@ function _Animate_Robot(robot,q, varargin)
     //adata=[];  // added later
 endfunction 
 
+// ---------------------------------------------------------------------
+
 function AnimateRobotHelp()
-        printf("=============================================================\n");
-        printf("Usage: AnimateRobot(robot,qs,<options>)\n\n");
-        printf("\twhere robot is the robot model to animate with joint variable sequence qs\n");
-        printf("\tqs must be a ns x nj vector, where ns = number of setpoints and nj = number of joints of robot\n");
-        printf("Available options: (put string in quotes)\n");
-        printf("\tgrid: add grid to plot\n");
-        printf("\t<figure, i>: plot on window number i\n");
-        printf("=============================================================\n");
+    printf("=============================================================\n");
+    printf("Usage: AnimateRobot(robot,qs,<options>)\n\n");
+    printf("\twhere robot is the robot model to animate with joint variable sequence qs\n");
+    printf("\tqs must be a ns x nj vector, where ns = number of setpoints and nj = number of joints of robot\n");
+    printf("Available options: (put string in quotes)\n");
+    printf("\tgrid: add grid to plot\n");
+    printf("\t<figure, i>: plot on window number i\n");
+    printf("=============================================================\n");
 endfunction
 
+// ---------------------------------------------------------------------
 
+animaterobot = _Animate_Robot;
+AnimateRobot = _Animate_Robot;
 
+// =====================================================================
 
 

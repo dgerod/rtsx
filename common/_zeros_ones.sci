@@ -1,9 +1,10 @@
-// _zeros_ones.sci  my version of zeros(), ones(), and eye() 
-//that works correctly for commands like _zeros(size(A))
+// =====================================================================
+// _zeros_ones.sci - my version of zeros(), ones(), and eye() 
+// that works correctly for commands like _zeros(size(A))
 // www.controlsystemslab.com   August 2012
+// =====================================================================
 
-
-function Z=_zeros(nr,nc)
+function Z = _zeros (nr,nc)
     nargin = argn(2);
     
     select nargin
@@ -23,8 +24,9 @@ function Z=_zeros(nr,nc)
     end
 endfunction
 
-
-function O=_ones(nr,nc)
+// ---------------------------------------------------------------------
+
+function O = _ones(nr,nc)
     nargin = argn(2);
     
     select nargin
@@ -43,8 +45,10 @@ function O=_ones(nr,nc)
         error("Invalid number of arguments");
     end
 endfunction
-
-function I=_eye(nr,nc)
+
+// ---------------------------------------------------------------------
+
+function I = _eye(nr,nc)
     nargin = argn(2);
     
     select nargin
@@ -63,4 +67,4 @@ function I=_eye(nr,nc)
         error("Invalid number of arguments");
     end
 endfunction
-
+// =====================================================================

@@ -1,6 +1,9 @@
+// =====================================================================
 // Link.sci  create robot manipulator link
 // www.controlsystemslab.com  July 2012
-// 
+// =====================================================================
+
+function L = Link (lparam,jtype,varargin)
 // Link function returns a data structrue that holds all information related
 // to a robot link such as kinematics parameters, rigid-body inertial 
 // parameters, motor and transmission parameters.
@@ -36,7 +39,6 @@
 // Note: There are some differences due to the current version of Scilab 
 // does not support OOP. 
 
-function L=Link(lparam,jtype,varargin)
     narg = argn(2);   // number of input arguments
     if narg==0 
        error("Usage:  L = Link([theta d a alpha <offset>],<joint_type>,<DH_type>,<optional parameter, value>)");
@@ -88,91 +90,104 @@ function L=Link(lparam,jtype,varargin)
         if pmodulo(varnum,2) then  // number of arguments is odd. Error!
             error("Input argument number is odd. You must miss something!");
         else
+        
             for iv =1:2:varnum-1  // select only command at odd position
+                
                 if type(varargin(iv)==10) then  // check if string (it should be!)
                     varargin(iv)=convstr(varargin(iv),'l'); // convert to lower 
                 end
+                
                 select varargin(iv),
                 case 'dhtype' then
-                        parm = varargin(iv+1);
-                        if type(parm)==1    // number
-                            if parm == 1    // modified DH
-                                L.mdh = 1;
-                            else
-                                L.mdh = 0;    // standard DH
-                            end
-                        elseif type(parm)==10  // string
-                            parm=convstr(parm,'l');
-                            if parm == 'mdh'
-                                L.mdh = 1;
-                            else
-                                L.mdh = 0;
-                            end
-                         end
+                    parm = varargin(iv+1);
+                    if type(parm)==1    // number
+                        if parm == 1    // modified DH
+                            L.mdh = 1;
+                        else
+                            L.mdh = 0;    // standard DH
+                        end
+                    elseif type(parm)==10  // string
+                        parm=convstr(parm,'l');
+                        if parm == 'mdh'
+                            L.mdh = 1;
+                        else
+                            L.mdh = 0;
+                        end
+                     end
                     
                 case 'qlim' then   // joint limits
                         qlim = varargin(iv+1);
                         if size(qlim)==[1 2] 
                             L.qlim = qlim;
-                        else error("Joint limits must be a 1x2 vector");
+                        else 
+                            error("Joint limits must be a 1x2 vector");
                         end
 
-                    case 'dynparm' then  // dynamic parameters
-                        parm = varargin(iv+1);
-                        if size(parm)==[1 15] 
-                            L.r = parm(1,1:3);
-                            v = parm(1,4:9);
-                            L.I = [v(1),v(4),v(6);v(4),v(2),v(5);v(6),v(5),v(3)];
-                            L.m = parm(1,10);
-                            L.Jm = parm(1,11);
-                            L.G = parm(1,12);
-                            L.B = parm(1,13);
-                            L.Tc = parm(1,14:15);
-                         else error("Dynamic parameters must be 1x15 vector");
-                         end  
-                    case 'r' then 
-                        parm = varargin(iv+1);
-                        if type(parm)== 1 & size(parm)==[1 3] // 1x3 vector
-                            L.r = parm;
-                        else error("r value must be a 1x3 vector");
-                        end                                                                                                    case 'i' then 
-                        parm = varargin(iv+1);
-                        if type(parm)== 1 & size(parm)==[1 6] // a 1x6 vector
-                            v = parm;
-                            L.I = [v(1),v(4),v(6);v(4),v(2),v(5);v(6),v(5),v(3)];
-                        else error("I value must be a 1x6 vector");
-                        end 
-                    case 'm' then 
-                        parm = varargin(iv+1);
-                        if type(parm)== 1 & size(parm)==[1 1] // a scalar
-                            L.m = parm;
-                        else error("m value must be a number");
-                        end                                                                                                 case 'jm' then 
-                        parm = varargin(iv+1);
-                        if type(parm)== 1 & size(parm)==[1 1] // a scalar
-                            L.Jm = parm;
-                        else error("Jm value must be a number");
-                        end                                                                                                  case 'g' then 
-                        parm = varargin(iv+1);
-                        if type(parm)== 1 & size(parm)==[1 1] // a scalar
-                            L.G = parm;
-                        else error("G value must be a number");
-                        end                                                                                                 case 'b' then 
-                        parm = varargin(iv+1);
-                        if type(parm)== 1 & size(parm)==[1 1] // a scalar
-                            L.B = parm;
-                        else error("B value must be a number");
-                        end                                                                                                 case 'tc' then 
-                        parm = varargin(iv+1);
-                        if type(parm)== 1 & size(parm)==[1 2] // a 1x2 vector
-                            L.Tc = parm;
-                        else error("Tc value must be a 1x2 vector");
-                        end                                                                                                                                              
-                    else
-                        emsg= sprintf("Invalid link parameter %s",varargin(iv)); 
-                        error(emsg); 
+                case 'dynparm' then  // dynamic parameters
+                    parm = varargin(iv+1);
+                    if size(parm)==[1 15] 
+                        L.r = parm(1,1:3);
+                        v = parm(1,4:9);
+                        L.I = [v(1),v(4),v(6);v(4),v(2),v(5);v(6),v(5),v(3)];
+                        L.m = parm(1,10);
+                        L.Jm = parm(1,11);
+                        L.G = parm(1,12);
+                        L.B = parm(1,13);
+                        L.Tc = parm(1,14:15);
+                     else 
+                        error("Dynamic parameters must be 1x15 vector");
+                     end  
+                case 'r' then 
+                    parm = varargin(iv+1);
+                    if type(parm)== 1 & size(parm)==[1 3] // 1x3 vector
+                        L.r = parm;
+                    else error("r value must be a 1x3 vector");
+                    end                                                                                                    
+                case 'i' then 
+                    parm = varargin(iv+1);
+                    if type(parm)== 1 & size(parm)==[1 6] // a 1x6 vector
+                        v = parm;
+                        L.I = [v(1),v(4),v(6);v(4),v(2),v(5);v(6),v(5),v(3)];
+                    else error("I value must be a 1x6 vector");
+                    end 
+                case 'm' then 
+                    parm = varargin(iv+1);
+                    if type(parm)== 1 & size(parm)==[1 1] // a scalar
+                        L.m = parm;
+                    else error("m value must be a number");
+                    end                                                                                                 
+                case 'jm' then 
+                    parm = varargin(iv+1);
+                    if type(parm)== 1 & size(parm)==[1 1] // a scalar
+                        L.Jm = parm;
+                    else error("Jm value must be a number");
+                    end                                                                                                  
+                case 'g' then 
+                    parm = varargin(iv+1);
+                    if type(parm)== 1 & size(parm)==[1 1] // a scalar
+                        L.G = parm;
+                    else error("G value must be a number");
+                    end                                                                                                 
+                case 'b' then 
+                    parm = varargin(iv+1);
+                    if type(parm)== 1 & size(parm)==[1 1] // a scalar
+                        L.B = parm;
+                    else error("B value must be a number");
+                    end                                                                                                 
+                case 'tc' then 
+                    parm = varargin(iv+1);
+                    if type(parm)== 1 & size(parm)==[1 2] // a 1x2 vector
+                        L.Tc = parm;
+                    else error("Tc value must be a 1x2 vector");
+                    end                                                                                                                                              
+                else
+                    emsg= sprintf("Invalid link parameter %s",varargin(iv)); 
+                    error(emsg); 
                 end // select varargin(iv)
             end  // for iv=1:varnum
         end    // if pmodulo(varnum,2)     
     end  // if narg>3
+
 endfunction
+
+// =====================================================================

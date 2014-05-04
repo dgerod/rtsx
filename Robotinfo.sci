@@ -1,17 +1,24 @@
+// =====================================================================
 // robotinfo.sci  displays information of a robott 
 // www.controlsystemslab.com   July 2012
+// =====================================================================
+
+function robotinfo (robot)
 // Usage: s=robotinfo(robot);
 // where robot is a robot data structure created from SerialLink()
-
-function robotinfo(robot)
-// where robot is a robot data structure created from SerialLink()
 //
-    if (robot.name=='') then name="N/A";
-    else name=robot.name;  
+    if (robot.name=='') then 
+        name = "N/A";
+    else 
+        name=robot.name;  
     end
-    if (robot.manuf=='') then manuf="N/A";
-    else manuf=robot.manuf;
+    
+    if (robot.manuf=='') then 
+        manuf = "N/A";
+    else 
+        manuf = robot.manuf;
     end
+    
     printf("\n================= Robot Information =====================\n");
     printf("Robot name: %s\n",name); 
     printf("Manufacturer: %s\n",manuf);   
@@ -20,6 +27,7 @@ function robotinfo(robot)
     if (robot.mdh==0) then printf("Method: Standard DH\n");
     else print("Method: Modified DH\n");
     end
+    
     // link parameters
     printf("+---+-----------+-----------+-----------+-----------+\n");
     printf("| j |   theta   |      d    |     a     |   alpha   |\n");
@@ -34,17 +42,23 @@ function robotinfo(robot)
         end           
     end
     printf("+---+-----------+-----------+-----------+-----------+\n");
+    
     printf("Gravity = ");
     disp(robot.gravity);
     printf("Base = ");
     disp(robot.base);
     printf("Tool = ");
     disp(robot.tool);
+    
     if robot.comment ~= '' 
         printf("Comment: %s\n",robot.comment);
     end
     
 endfunction
 
+// ---------------------------------------------------------------------
+
 Robotinfo = robotinfo;
 RobotInfo = robotinfo;
+
+// =====================================================================

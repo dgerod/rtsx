@@ -1,19 +1,21 @@
+// =====================================================================
 // Robot2hATs.sci generates  4-dimensional matrices "A" and "T" matrices 
 // from robot information and rows of joint variables
 // www.controlsystemslab.com    July 2012
-//
+// =====================================================================
+
+function [A,T]=Robot2hAT (robot,q)
 // Usage: [A,T] = Robot2hAT(robot,q); where q is m x n matrices containing m sets of
 // n joint variables
 // 
 // if L contains n links, A becomes a 4 x 4 x m x n matrix
 // and T is the overall homogeneous transformation; i.e, T=A1*...*An
-//Notes:
-// - For a revolute joint the THETA parameter of the link is ignored, and Q used instead.
-// - For a prismatic joint the D parameter of the link is ignored, and Q used instead.
-// - The link offset parameter is added to Q before computation of the transformation matrix.
+// Notes:
+//    - For a revolute joint the THETA parameter of the link is ignored, and Q used instead.
+//    - For a prismatic joint the D parameter of the link is ignored, and Q used instead.
+//    - The link offset parameter is added to Q before computation of the transformation matrix.
+//
 
-
-function [A,T]=Robot2hAT(robot,q)
       sdhflag = 0;        // flag for stdDH
       mdhflag = 0;        // flag for modDH
       L=robot.Link;
@@ -64,8 +66,11 @@ function [A,T]=Robot2hAT(robot,q)
               A = [];
               T = [];
         end 
+        
 endfunction
 
-function [A,T]=robot2hat(robot,q)
-    [A,T]=Robot2hAT(robot,q);
-endfunction
+// ---------------------------------------------------------------------
+
+robot2hat = Robot2hAT;
+
+// =====================================================================

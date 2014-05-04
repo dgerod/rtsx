@@ -1,9 +1,9 @@
+// =====================================================================
 // ikine6s.sci   Inverse kinematics for 6-axis robot with spherical wrist
 // www.controlsystemslab.com   August 2012
-// This function is adapted from the Robotic Toolbox for MATLAB, Copyright (C) 
-// 1993-2011, by Peter I. Corke
+// =====================================================================
 
-
+function q = _ikine6s (robot, T, varargin)
 // q = IKine6s(robot, T) is the joint coordinates corresponding to the robot
 // end-effector pose T represented by the homogenenous transform.  This
 // is a analytic solution for a 6-axis robot with a spherical wrist (such as
@@ -26,15 +26,10 @@
 // - Joint offsets, if defined, are added to the inverse kinematics to 
 //   generate q.
 //
-function q = IKine6s(robot, T, varargin)
-    q = _ikine6s(robot, T, varargin);    
-endfunction
+// This function is adapted from the Robotic Toolbox for MATLAB, Copyright (C) 
+// 1993-2011, by Peter I. Corke
+//
 
-function q = ikine6s(robot, T, varargin)
-    q = _ikine6s(robot, T, varargin);    
-endfunction
-
-function q = _ikine6s(robot, T, varargin)
     varargin = varargin($);
     if strcmp(robot.conf, 'RRRRRR')
         error('Solution only applicable for 6DOF all-revolute manipulator');
@@ -239,3 +234,11 @@ function q = _ikine6s(robot, T, varargin)
     q=clean(theta');
     
 endfunction
+
+// ---------------------------------------------------------------------
+
+IKine6s = _ikine6s;
+ikine6s = _ikine6s;
+invkinem6s = _ikine6s;
+
+// =====================================================================

@@ -1,5 +1,9 @@
-// Xlocate.sci   locate intersection point of xi and zi-1
+// =====================================================================
+// Xlocate.sci - locate intersection point of xi and zi-1
 // www.controlsystemslab.com   July 2012
+// =====================================================================
+
+function pxz=Xlocate(robot,q,A,Ti,lindex)
 // pxz = Xlocate(robot,A,Ti,lindex)
 // Input arguments
 // robot = robot data structure
@@ -13,8 +17,7 @@
 // lindex = link index. Ex. when lindex = 1, the function returns
 //          intersection point of X1 and Z0
 // Notation :  {1} indicates frame 1
-
-function pxz=Xlocate(robot,q,A,Ti,lindex)
+//
     o_i = A(1:3,4,lindex); // origin of {i} w.r.t {i-1}
     if o_i(3)>= 0 then
         if robot.Link(lindex).RP=='R' pxz_i = [0 0 robot.Link(lindex).d 1]'; // on positive Zi
@@ -29,6 +32,8 @@ function pxz=Xlocate(robot,q,A,Ti,lindex)
     pxz = pxz(1:3,1);
 endfunction
 
-function pxz=xlocate(robot,q,A,Ti,lindex)
-    pxz=Xlocate(robot,q,A,Ti,lindex);
-endfunction
+// ---------------------------------------------------------------------
+
+xlocate = Xlocate;
+
+// =====================================================================

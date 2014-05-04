@@ -1,19 +1,29 @@
+// =====================================================================
 // PlotRobot.sci sketch a robot manipulator in 3-D
 // www.controlsystemslab.com   July 2012
+// =====================================================================
 
-function [T]=_Plot_Robot(robot,q, varargin)
+function [T] = _Plot_Robot (robot,q,varargin)
 // where robot is the robot model to plot with joint variable q
 // q must be a 1 x nj vector, where nj = number of joints of robot
 // Available options: (put string in quotes)
 // grid: add grid to plot <figure, i>: plot on window number i
 // 
-    varargin=varargin($);
+
+    // Check if inputs are variable or not ---
+    if argn(2) > 2 then        
+        varargin = varargin($);
+        varnum = length(varargin);
+    else
+        varargin = [];
+        varnum = 0;
+    end
+    // ---
     ShowGrid = 0;  // default plot to no grid
     // retrieve variable arguments
     fnum = max(winsid())+1;
     Hold = 0;
     setfignum = 0;
-    varnum=length(varargin);  // number of arguments
     PlotWorld = 1;        // plot world and tool frame as default
     PlotTool = 1;
     dcolor = 7; // default to yellow
@@ -359,6 +369,8 @@ function [T]=_Plot_Robot(robot,q, varargin)
 
 endfunction 
 
+// ---------------------------------------------------------------------
+
 function PlotRobotHelp()
         printf("=============================================================\n");    
         printf("Usage: [T]=PlotRobot(robot,q,<options>)\n\n");
@@ -370,19 +382,9 @@ function PlotRobotHelp()
         printf("=============================================================\n");
 endfunction
 
-function [T]=PlotRobot(robot,q,varargin)
-// where robot is the robot model to plot with joint variable q
-// q must be a 1 x nj vector, where nj = number of joints of robot
-// Available options: (put string in quotes)
-// grid: add grid to plot <figure, i>: plot on window number i
-// 
+// ---------------------------------------------------------------------
 
-    if argn(2)==0 then
-        PlotRobotHelp();
-        T=[];
-    else
-        T = _Plot_Robot(robot,q,varargin);
-    end    
-endfunction
+PlotRobot = _Plot_Robot;
+plotrobot = _Plot_Robot;
 
-plotrobot = PlotRobot;
+// =====================================================================

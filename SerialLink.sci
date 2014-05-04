@@ -1,9 +1,11 @@
+// =====================================================================
 // SerialLink.sci creates a SerialLink robot structure
 // www.controlsystemslab.com  July 2012
+// =====================================================================
 
 function rm = _Serial_Link (L,varargin)
 // Parameters
-// Link(i)      Link structure (inherited from L)
+// Link(i)     Link structure (inherited from L)
 //  gravity    direction of gravity [gx gy gz]
 //  base       pose of robot's base (4x4 homog xform)
 //  tool       robot's tool transform, T6 to tool tip (4x4 homog xform)
@@ -12,29 +14,45 @@ function rm = _Serial_Link (L,varargin)
 //
 //  nj           number of joints
 //  config      joint configuration string, eg. 'RRRRRR'
-//  mdh         kinematic convention boolean (0=DH, 1=MDH)
-//
-// Usage: RM = SerialLink(L, options)
-//
-     varargin = varargin($);
-     varnum=length(varargin);
+//  mdh         kinematic convention boolean (0 = Std DH, 1 = Modified DH)
+// 
+
+    // Check if inputs are variable or not ---
+    if argn(2) > 1 then        
+        varargin = varargin($);
+        varnum = length(varargin);
+    else
+        varargin = [];
+        varnum = 0;
+    end
+    // ---
+     
      sdhflag = 0;        // flag for stdDH
      mdhflag = 0;        // flag for modDH
-     nlinks=size(L,1);    // number of links
-     rm.nj = nlinks;      // number of joints
+     nlinks=size(L,1);   // number of links
+     rm.nj = nlinks;     // number of joints
      rm.mdh = 0;         // default to stdDH
-     rm.conf = '';        // joint configuration string
+     rm.conf = '';       // joint configuration string
+     
      for i=1:nlinks
+         
          rm.Link(i)=L(i);
+         
          if rm.Link(i).mdh then 
              mdhflag = 1;  // modified DH detected
-             rm.mdh = 1;    // modDH 
-         else sdhflag = 1; // standard DH detected
+             rm.mdh = 1;   // modDH 
+         else 
+            sdhflag = 1;   // standard DH detected
          end
-         if L(i).sigma then rm.conf=strcat([rm.conf,'P']);
-         else rm.conf=strcat([rm.conf,'R']);
+         
+         if L(i).sigma then 
+            rm.conf=strcat([rm.conf,'P']);
+         else 
+            rm.conf=strcat([rm.conf,'R']);
          end
+         
      end
+     
      if (sdhflag & mdhflag) then // mixed DH conventions not allowed
          rm = []; //return null matrix
          error('Robot has mixed DH link conventions');
@@ -98,5 +116,9 @@ function rm = _Serial_Link (L,varargin)
         end // if pmodulo(varnum,2)
 endfunction
 
+// ---------------------------------------------------------------------
+
 seriallink = _Serial_Link;
 SerialLink = _Serial_Link;
+
+// =====================================================================

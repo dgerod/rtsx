@@ -1,9 +1,10 @@
+// =====================================================================
 // ikine3.sci   Inverse kinematics for 3-axis robot with no wrist
 // www.controlsystemslab.com   August 2012
-// This function is adapted from the Robotic Toolbox for MATLAB, Copyright (C) 
-// 1993-2011, by Peter I. Corke
 
+// =====================================================================
 
+function q = _ikine3 (robot, T, varargin)
 // q = IKine3(robot, T) is the joint coordinates corresponding to the robot
 // end-effector pose T represented by the homogenenous transform.  This
 // is a analytic solution for a 3-axis robot (such as the first three joints
@@ -16,7 +17,6 @@
 // 'r'   arm to the right
 // 'u'   elbow up (default)
 // 'd'   elbow down
-
 //
 // Notes::
 // - The same as ikine6s without the wrist.
@@ -25,15 +25,10 @@
 // - Joint offsets, if defined, are added to the inverse kinematics to 
 //   generate q.
 //
-function q = IKine3(robot, T, varargin)
-    q = _ikine3(robot, T, varargin);    
-endfunction
+// This function is adapted from the Robotic Toolbox for MATLAB, Copyright (C) 
+// 1993-2011, by Peter I. Corke
+//
 
-function q = ikine3(robot, T, varargin)
-    q = _ikine3(robot, T, varargin);    
-endfunction
-
-function q = _ikine3(robot, T, varargin)
     varargin = varargin($);
     if strcmp(robot.conf, 'RRR')
         error('Solution only applicable for 3DOF all-revolute manipulator');
@@ -172,3 +167,11 @@ function q = _ikine3(robot, T, varargin)
     q=clean(theta');
     
 endfunction
+
+// ---------------------------------------------------------------------
+
+IKine = _ikine3;
+ikine3 = _ikine3;
+invkinem3 = _ikine3;
+
+// =====================================================================

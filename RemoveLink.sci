@@ -1,33 +1,22 @@
-//RemoveLink.sci  remove a robot link specified by li
+// =====================================================================
+// RemoveLink.sci  remove a robot link specified by li
 // www.controlsystemslab.com   August 2012
+
+// =====================================================================
+    
+function robot = _Remove_Link (robot,li)
 // usage: robot=RemoveLink(robot,li);
 // Example: 
 // --> robot = RemoveLink(robot,2) // remove link 2
-
-function robot=RemoveLink(robot,li)
-    if argn(2)==0 then
-       RemoveLinkHelp();
-        robot=[];
-    else
-        robot = _Remove_Link(robot,li);
-    end          
-endfunction
-
-function robot=removelink(robot,li)
-    if argn(2)==0 then
-       RemoveLinkHelp();
-        robot=[];
-    else
-        robot = _Remove_Link(robot,li);
-    end 
-endfunction
-    
-function robot=_Remove_Link(robot,li)
+//
 
 
-    if type(li)~=1 error ("Link index must be a number.");
+    if type(li) ~= 1 
+        error ("Link index must be a number.");
     end
+    
     nlinks=robot.nj;
+    
     if li<1 | li>nlinks
         emsg=sprintf("Valid link index is between 1 - %d",nlinks);
         error(emsg);
@@ -50,10 +39,19 @@ function robot=_Remove_Link(robot,li)
     
 endfunction       
 
+// ---------------------------------------------------------------------
+
 function RemoveLinkHelp()
-        printf("=============================================================\n");
-        printf("Usage: robot=RemoveLink(robot,li)\n\n");
-        printf("remove link li of a robot\n");
-        printf("\tEx: robot=RemoveLink(robot,2); // remove link 2 \n");
-        printf("=============================================================\n");
+    printf("=============================================================\n");
+    printf("Usage: robot=RemoveLink(robot,li)\n\n");
+    printf("remove link li of a robot\n");
+    printf("\tEx: robot=RemoveLink(robot,2); // remove link 2 \n");
+    printf("=============================================================\n");
 endfunction
+
+// ---------------------------------------------------------------------
+
+RemoveLink = _Remove_Link;
+removelink = _Remove_Link;
+
+// =====================================================================

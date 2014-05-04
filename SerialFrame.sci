@@ -1,8 +1,10 @@
+// =====================================================================
 // SerialFrame.sci construct a chain of coordinate frame
 // computing missing information if possible
 // www.controlsystemslab.com   August 2012
+// =====================================================================
 
-function sf = _Serial_Frame(F, varargin)
+function sf = _Serial_Frame (F,varargin)
    
     varargin = varargin($);
     varnum=length(varargin); 
@@ -146,5 +148,9 @@ function sf = _Serial_Frame(F, varargin)
         //pause;   
 endfunction
 
+// ---------------------------------------------------------------------
+
 SerialFrame = _Serial_Frame;
 serialframe = _Serial_Frame;
+
+// =====================================================================

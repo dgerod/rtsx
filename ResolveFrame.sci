@@ -1,3 +1,4 @@
+// =====================================================================
 // ResolveFrame.sci  Find missing frame information in a closed loop kinematic
 // chain
 // www.controlsystemslab.com   August 2012
@@ -5,9 +6,17 @@
 // kc2 must be a completed frame, or just a homogeneous matrix describing
 // the end frame of kc1 w.r.t base
 // return resolved kc1 as well as T_rel and T_abs of missing frame
+// =====================================================================
 
-function [T_rel,T_abs,kc1]=ResolveFrame(kc1,kc2)
+function [T_rel,T_abs,kc1] = ResolveFrame (kc1,kc2)
+// Find missing frame information in a closed loop kinematic chain
+//    kc1 is the frame to be solved
+//    kc2 must be a completed frame, or just a homogeneous matrix describing
+//    the end frame of kc1 w.r.t base
+// return resolved kc1 as well as T_rel and T_abs of missing frame
+//
     printf("\nRunning ResolveFrame ...\n");
+
     nframes1 = size(kc1.Frame,1);
     if type(kc2)== 17 then   
             nframes2 = size(kc2.Frame,1);
@@ -90,8 +99,6 @@ function [T_rel,T_abs,kc1]=ResolveFrame(kc1,kc2)
 
         end // if kc1.completed
     
-    
-    
         // checking if the chain is completed
         printf("\nRechecking if there are still missing frame data in %s",kc1.name);
         CompleteFlag = 1;
@@ -118,6 +125,8 @@ function [T_rel,T_abs,kc1]=ResolveFrame(kc1,kc2)
        
 endfunction
 
-function [T_rel,T_abs,kc1]=resolveframe(kc1,kc2)
-    [T_rel,T_abs,kc1]=ResolveFrame(kc1,kc2);
-endfunction
+// ---------------------------------------------------------------------
+
+resolveframe = ResolveFrame;
+
+// =====================================================================

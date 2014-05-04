@@ -1,6 +1,10 @@
+// =====================================================================
 // Xlocate4.sci   locate intersection point of xi and zi-1
 // for 4-dimensional A and T matrices
 // www.controlsystemslab.com   July 2012
+// =====================================================================
+
+function pxz=Xlocate4(robot,q,A,T,j,i)
 // pxz = Xlocate(robot,A,T,j,i)
 // Input arguments
 // robot = robot data structure
@@ -16,8 +20,8 @@
 // Ti(:,:,j,nlinks+2)= Tb*A1*A2*...*A_nlinks*Tt;
 // 
 // Notation :  {1} indicates frame 1
+//
 
-function pxz=Xlocate4(robot,q,A,T,j,i)
     o_i = A(1:3,4,j,i); // origin of {i} w.r.t {i-1}
     if o_i(3)>= 0 then
         if robot.Link(i).RP=='R' pxz_i = [0 0 robot.Link(i).d 1]'; // on positive Zi
@@ -30,8 +34,11 @@ function pxz=Xlocate4(robot,q,A,T,j,i)
     end
     pxz = T(:,:,j,i)*pxz_i;
     pxz = pxz(1:3,1);   // extract 3 x 1 vector
+
 endfunction
 
-function pxz=xlocate4(robot,q,A,T,j,i)
-    pxz=Xlocate4(robot,q,A,T,j,i);
-endfunction
+// ---------------------------------------------------------------------
+
+xlocate4 = Xlocate4;
+
+// =====================================================================

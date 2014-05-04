@@ -1,10 +1,13 @@
+// =====================================================================
 // tb_optparse.sci  
 // Remark: I have no idea how to adapt this one
 // so it is not used.
 // This function is adapted from The Robotics Toolbox for Matlab (RTB).
 // Copyright (C) 1993-2011, by Peter I. Corke 
 // http://www.petercorke.com
+// =====================================================================
 
+function [opt,others] = tb_optparse(in, argv)
 // OPTPARSE Standard option parser for Toolbox functions
 //
 // [OPTOUT,ARGS] = TB_OPTPARSE(OPT, ARGLIST) is a generalized option parser for
@@ -60,15 +63,13 @@
 //   'debug', N          sets opt.debug <- N
 //   'setopt', S         sets opt <- S
 //   'showopt'           displays opt and arglist
-
+//
 // Ryan Steindl based on Robotics Toolbox for MATLAB (v6 and v9)
-
 //
 // Copyright (C) 1993-2011, by Peter I. Corke 
 //
 // This file is part of The Robotics Toolbox for MATLAB (RTB).
-
-function [opt,others] = tb_optparse(in, argv)
+//
     
     false=0;
     true = 1;
@@ -231,4 +232,7 @@ function [opt,others] = tb_optparse(in, argv)
     if nargout == 2
         others = arglist;
     end
+
 endfunction 
+
+// =====================================================================

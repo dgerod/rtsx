@@ -1,35 +1,31 @@
-//AnimateRobotFrame.sci  show a movie of robot manipulator frame in 3-D
+// =====================================================================
+// AnimateRobotFrame.sci - Show a movie of robot manipulator frame in 3-D
 // corresponding to a sequence of joint variables
 // www.controlsystemslab.com   July 2012
+// =====================================================================
 
-function animaterobotframe(robot,q,varargin)
-    if argn(2)==0 then
-        AnimateRobotFrameHelp();
-       
+function _Animate_Robot_Frame (robot,q,varargin)
+// Usage: AnimateRobotFrame(robot,qs,<options>)
+// where robot is the robot model to animate with joint variable sequence qs
+// qs must be a ns x nj vector, where ns = number of setpoints and nj = number of joints of robot
+// Available options: (put string in quotes
+//    grid: add grid to plot
+//    <figure, i>: plot on window number i
+//
+
+    // Check if inputs are variable or not ---
+    if argn(2) > 2 then        
+        varargin = varargin($);
+        varnum = length(varargin);
     else
-        
-         _Animate_Robot_Frame(robot,q,varargin);
-    end    
-
-endfunction
-
-function AnimateRobotFrame(robot,q,varargin)
-    if argn(2)==0 then
-        AnimateRobotFrameHelp();
-       
-    else
-        
-        _Animate_Robot_Frame(robot,q,varargin);
-    end    
-endfunction
-
-
-function _Animate_Robot_Frame(robot,q, varargin)
-    varargin=varargin($);
+        varargin = [];
+        varnum = 0;
+    end
+    // ---
+    
     ShowGrid = 0;  // default plot to no grid
     // retrieve variable arguments
     fnum = max(winsid())+1;
-    varnum=length(varargin);  // number of arguments
     
     PlotWorld = 1;        // plot world and tool frame as default
     PlotTool = 1;
@@ -430,6 +426,8 @@ function _Animate_Robot_Frame(robot,q, varargin)
     //adata=[];  // added later
 endfunction 
 
+// ---------------------------------------------------------------------
+
 function AnimateRobotFrameHelp()
         printf("=============================================================\n");
         printf("Usage: AnimateRobotFrame(robot,qs,<options>)\n\n");
@@ -442,5 +440,11 @@ function AnimateRobotFrameHelp()
 endfunction
 
 
+// ---------------------------------------------------------------------
 
-
+animaterobotframe = _Animate_Robot_Frame;
+AnimateRobotFrame = _Animate_Robot_Frame;
+
+// =====================================================================
+
+

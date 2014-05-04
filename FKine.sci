@@ -1,12 +1,16 @@
+// =====================================================================
 // FKine.sci  computes forward kinematics of a robot
 // www.controlsystemslab.com   July 2012
-// Usage T=FKine(robot,q) where robo is a robot structure created
+// =====================================================================
+
+function T = FKine (robot,q)
+// Usage T = FKine(robot,q) where robo is a robot structure created
 // by SerialLink(), and q is a joint variable vector
 // FKine() simply calls Link2AT()
 // q can be a set of trajectory. In this case, FKine() returns a 
 // multi-dimensional matrix 
+//
 
-function T=FKine(robot,q)
     L=robot.Link;
     Tb=robot.base;
     Tt=robot.tool;
@@ -21,6 +25,10 @@ function T=FKine(robot,q)
      end
 endfunction
 
-function T=fkine(robot,q)
-    T=FKine(robot,q);
-endfunction
+// ---------------------------------------------------------------------
+
+fkine = FKine;
+fwdkinem = FKine;
+dirkinem = FKine;
+
+// =====================================================================

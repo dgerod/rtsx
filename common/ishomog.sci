@@ -1,3 +1,8 @@
+// =====================================================================
+//
+// =====================================================================
+
+function h = ishomog (tr,rtest)
 //ISHOMOG Test if argument is a homogeneous transformation
 //
 // ISHOMOG(T) is true (1) if the argument T is of dimension 4x4 or 4x4xN, else 
@@ -7,14 +12,11 @@
 // matrix.
 //
 // See also ISROT, ISVEC.
-
-
-// Copyright (C) 1993-2011, by Peter I. Corke
 //
+// Copyright (C) 1993-2011, by Peter I. Corke
 // This file is part of The Robotics Toolbox for Matlab (RTB).
 // 
-//
-function h = ishomog(tr, rtest)
+
     d = size(tr);
     if ndims(tr) >= 2
         h =  and(d(1:2) == [4 4]);
@@ -27,3 +29,6 @@ function h = ishomog(tr, rtest)
         h = 0;
     end
 endfunction
+
+// =====================================================================
+

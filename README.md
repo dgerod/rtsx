@@ -5,4 +5,8 @@ The RTSX (Robotics Tools for Scilab/Xcos) is an open-source software written in 
 
 The toolset is inspired by Robotic Toolbox for MATLAB/Simulink by P.I.Corke [http://petercorke.com/Robotics_Toolbox.html] and share a similar set of core commands and functionality, though there are also differences in certain parts of the software. And it was created by Dr.Varodom Toochinda.
 
-The webpage of the toolbox is: http://controlsystemslab.com/rtsx
+To start using the toolset, enter: exec('startup_rtsx.sce',-1) at Scilab command prompt. 
+
+The webpage of the toolbox is: [http://controlsystemslab.com/rtsx]. 
+The online help is available at [http://controlsystemslab.com/rtsx/online-help] and for PDF document go to subdirectory "/doc"
+

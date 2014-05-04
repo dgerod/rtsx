@@ -1,8 +1,15 @@
-// blkdiag2.sci   form a block diagonal matrix from 2 matrices
+// =====================================================================
+// blkdiag2.sci - form a block diagonal matrix from 2 matrices
+// =====================================================================
 
-function Z = blkdiag2(X,Y)
+function Z = blkdiag2 (X,Y)
+// Form a block diagonal matrix from 2 matrices
+//
+
     sizex = size(X);
     sizey = size(Y);
     Z = [X zeros(sizex(1),sizey(2)); zeros(sizey(1),sizex(2)) Y];
     
 endfunction
+
+// =====================================================================

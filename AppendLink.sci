@@ -1,5 +1,8 @@
-//AppendLink.sci  append a new link to robot 
+// =====================================================================
+// AppendLink.sci - Append a new link to robot 
 // www.controlsystemslab.com   August 2012
+// =====================================================================
+
 // usage: robot=AppendLink(robot,L,li);
 // first create a new link using Link() function
 // Example: 
@@ -8,25 +11,15 @@
 //                                      previous link 2 becomes link 3 etc.
 // --> robot = AppendLink(robot,L)  // append link on top
 
-function robot=AppendLink(robot,L,varargin)
-    if argn(2)==0 then
-        AppendLinkHelp();
-        robot=[];
-    else
-        robot = _Append_Link(robot,L,varargin);
-    end          
-endfunction
+function robot = _Append_Link (robot,L,varargin)
+// Usage: robot=AppendLink(robot,L,<link position>)
+// First create a new link using Link() function, then append
+// to robot at specified location
+// Ex: robot=AppendLink(robot,L,2); inserts at link 2
+// (previous link 2 becomes link 3, etc.)
+// robot=AppanedLink(robot,L); inserts above topmost link
+// 
 
-function robot=appendlink(robot,L,varargin)
-    if argn(2)==0 then
-        AppendLinkHelp();
-        robot=[];
-    else
-        robot = _Append_Link(robot,L,varargin);
-    end 
-endfunction
-    
-function robot=_Append_Link(robot,L,varargin)
     if robot.mdh ~= L.mdh 
         if robot.mdh==0 printf("Robot model has standard DH parameters\n");
         else printf("Robot model has modified DH parameters\n");
@@ -69,6 +62,8 @@ function robot=_Append_Link(robot,L,varargin)
     
 endfunction       
 
+// ---------------------------------------------------------------------
+
 function AppendLinkHelp()
         printf("=============================================================\n");
         printf("Usage: robot=AppendLink(robot,L,<link position>)\n\n");
@@ -79,3 +74,10 @@ function AppendLinkHelp()
         printf("\trobot=AppanedLink(robot,L); // inserts above topmost link\n");
         printf("=============================================================\n");
 endfunction
+
+// ---------------------------------------------------------------------
+
+AppendLink = _Append_Link;
+appendlink = _Append_Link;
+
+// =====================================================================

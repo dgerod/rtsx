@@ -1,37 +1,32 @@
+// =====================================================================
 // PlotRobotFrame.sci  sketch a robot frame structure in 3-D
 // www.controlsystemslab.com   July 2012
+// =====================================================================
 
-function [T]=plotrobotframe(robot,q,varargin)
-    if argn(2)==0 then
-        PlotRobotFrameHelp();
-        T=[];
+function [T] = _Plot_Robot_Frame (robot,q,varargin)
+// Usage: [T]=PlotRobotFrame(robot,q,<options>)
+// where robot is the robot model to plot with joint variable q
+// q must be a 1 x nj vector, where nj = number of joints of robot
+// Available options: (put string in quotes)
+//    grid: add grid to plot
+//    <figure, i>: plot on window number i
+// 
+         
+    // Check if inputs are variable or not ---
+    if argn(2) > 2 then        
+        varargin = varargin($);
+        varnum = length(varargin);
     else
-        
-        T = _Plot_Robot_Frame(robot,q,varargin);
-    end    
-
-endfunction
-
-function [T]=PlotRobotFrame(robot,q,varargin)
-    if argn(2)==0 then
-        PlotRobotFrameHelp();
-        T=[];
-    else
-        
-        T = _Plot_Robot_Frame(robot,q,varargin);
-    end    
-endfunction
-
-
-
-function [T]=_Plot_Robot_Frame(robot,q, varargin)
-    varargin=varargin($);
+        varargin = [];
+        varnum = 0;
+    end
+    // ---
+    
     ShowGrid = 0;  // default plot to no grid
     // retrieve variable arguments
     Hold = 0;     // whether to hold previous plot
     fnum = max(winsid())+1;
     setfignum=0;
-    varnum=length(varargin);  // number of arguments    
     PlotWorld = 1;        // plot world and tool frame as default
     if robot.tool==eye(4,4) then
         PlotTool = 0;
@@ -352,13 +347,22 @@ function [T]=_Plot_Robot_Frame(robot,q, varargin)
 
 endfunction 
 
+// ---------------------------------------------------------------------
+
 function PlotRobotFrameHelp()
-        printf("=============================================================\n");    
-        printf("Usage: [T]=PlotRobotFrame(robot,q,<options>)\n\n");
-        printf("\twhere robot is the robot model to plot with joint variable q\n");
-        printf("\tq must be a 1 x nj vector, where nj = number of joints of robot\n");
-        printf("Available options: (put string in quotes)\n");
-        printf("\tgrid: add grid to plot\n");
-        printf("\t<figure, i>: plot on window number i\n");
-        printf("=============================================================\n");        
+    printf("=============================================================\n");    
+    printf("Usage: [T]=PlotRobotFrame(robot,q,<options>)\n\n");
+    printf("\twhere robot is the robot model to plot with joint variable q\n");
+    printf("\tq must be a 1 x nj vector, where nj = number of joints of robot\n");
+    printf("Available options: (put string in quotes)\n");
+    printf("\tgrid: add grid to plot\n");
+    printf("\t<figure, i>: plot on window number i\n");
+    printf("=============================================================\n");        
 endfunction
+
+// ---------------------------------------------------------------------
+
+plotrobotframe  = _Plot_Robot_Frame;
+PlotRobotFrame = _Plot_Robot_Frame;
+
+// =====================================================================

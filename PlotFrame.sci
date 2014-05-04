@@ -1,24 +1,17 @@
+// =====================================================================
 // PlotFrame.sci  plot a chain of coordinate frame
 // www.controlsystemslab.com  August 2012
+// =====================================================================
 
+function _Plot_Frame (kc, varargin)
+// Usage: PlotFrame(kc,<options>)
+// where kc is a completed kinematic chain to plot
+// Available options: (put string in quotes)
+//    grid: add grid to plot
+//    <figure, i>: plot on window number i
+//    oinfo: show origin coordinates
+// 
 
-function plotframe(kc,varargin)
-    if argn(2)==0
-        PlotFrameHelp();
-    else 
-        _Plot_Frame(kc,varargin);
-    end
-endfunction
-
-function PlotFrame(kc, varargin)
-    if argn(2)==0
-        PlotFrameHelp();
-    else 
-        _Plot_Frame(kc,varargin);
-    end
-endfunction
-
-function _Plot_Frame(kc, varargin)
     if ~kc.completed    // check whether chain is completed
         error("Cannot plot an incomplete chain");
     end    
@@ -172,13 +165,23 @@ function _Plot_Frame(kc, varargin)
     
 endfunction    
 
+// ---------------------------------------------------------------------
+
 function PlotFrameHelp()
-        printf("=============================================================\n");    
-        printf("Usage: PlotFrame(kc,<options>)\n\n");
-        printf("\twhere kc is a completed kinematic chain to plot\n");
-        printf("Available options: (put string in quotes)\n");
-        printf("\tgrid: add grid to plot\n");
-        printf("\t<figure, i>: plot on window number i\n");
-        printf("\toinfo: show origin coordinates\n");
-        printf("=============================================================\n");        
+    printf("=============================================================\n");    
+    printf("Usage: PlotFrame(kc,<options>)\n\n");
+    printf("\twhere kc is a completed kinematic chain to plot\n");
+    printf("Available options: (put string in quotes)\n");
+    printf("\tgrid: add grid to plot\n");
+    printf("\t<figure, i>: plot on window number i\n");
+    printf("\toinfo: show origin coordinates\n");
+    printf("=============================================================\n");        
 endfunction        
+
+// ---------------------------------------------------------------------
+
+plotframe = _Plot_Frame;
+PlotFrame = _Plot_Frame;
+
+// =====================================================================
+
