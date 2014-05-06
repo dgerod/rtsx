@@ -19,10 +19,8 @@ function rm = _Serial_Link (L,varargin)
 
     // Check if inputs are variable or not ---
     if argn(2) > 1 then        
-        varargin = varargin($);
         varnum = length(varargin);
     else
-        varargin = [];
         varnum = 0;
     end
     // ---

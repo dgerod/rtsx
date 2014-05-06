@@ -7,7 +7,8 @@
 function sf = _Serial_Frame (F,varargin)
    
     varargin = varargin($);
-    varnum=length(varargin); 
+    varnum = length(varargin); 
+    
     printf("\nReading frame data and computing missing information\n");    
     nframes = size(F,1);
     sf.nf = nframes;  // keep number of frames
@@ -43,23 +44,23 @@ function sf = _Serial_Frame (F,varargin)
                     else error("*** Value for frame viewangle must be 1 x 2 vector ***");
                     end
 
-                end // select varargin(iv)
-            end // for iv=1:2:varnum-1
-        end // if pmodulo(varnum,2)  
+            end // select varargin(iv)
+        end // for iv=1:2:varnum-1
+    end // if pmodulo(varnum,2)  
             
     printf("\nProcessing Upwards ...\n\n");
     for i=1:nframes
+    
         sf.Frame(i)=F(i);
 
         if F(i).name == '' then    // set name to frame i
             sbuf = sprintf("%d",i);
             sf.Frame(i).name = sbuf;
-        else sf.Frame(i).name = F(i).name;
+        else 
+            sf.Frame(i).name = F(i).name;
         end
-        // solve for missing information
         
-       
-
+        // solve for missing information        
         if i==1 then // for base frame, simply set Tabs = Trel
             if sf.Frame(i).Tabs == [] & sf.Frame(i).Trel == []
                 // base frame must have either Tabs or Trel information

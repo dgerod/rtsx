@@ -12,13 +12,12 @@ function [T] = _Plot_Robot (robot,q,varargin)
 
     // Check if inputs are variable or not ---
     if argn(2) > 2 then        
-        varargin = varargin($);
         varnum = length(varargin);
     else
-        varargin = [];
         varnum = 0;
     end
     // ---
+    
     ShowGrid = 0;  // default plot to no grid
     // retrieve variable arguments
     fnum = max(winsid())+1;
@@ -31,9 +30,11 @@ function [T] = _Plot_Robot (robot,q,varargin)
     llstyle = 1;  // default link style = solid
     dlstyle = 1; // default to solid
     for iv =1:varnum
-        if type(varargin(iv))==10 then  // string
-            varargin(iv)=convstr(varargin(iv),'l');   // convert to lower case
+        
+        if type(varargin(iv)) == 10 then  // string
+            varargin(iv) = convstr(varargin(iv),'l');   // convert to lower case
         end
+        
         if varargin(iv)=='grid' then
             ShowGrid = 1;       
         elseif varargin(iv)== 'noworld' then
@@ -41,7 +42,7 @@ function [T] = _Plot_Robot (robot,q,varargin)
         elseif varargin(iv)== 'notool' then
             PlotTool = 0;
         elseif varargin(iv)=='hold' then
-            Hold = 1; 
+            Hold = 1;
             if ~setfignum then  // hold last window
                 curwin = winsid();
                 if curwin~=[] fnum = curwin(length(curwin));
@@ -71,7 +72,7 @@ function [T] = _Plot_Robot (robot,q,varargin)
     PlotScale = 0.1;    // global scale, for adjusting plot size
     WorldBase = 0;    // flag whether world and base frame are the same 
     bmargin = 0.1;     // margin for axis bound
-    MaxLength=max(max(robot.Link.d),max(robot.Link.a)); // the longest dimension
+    MaxLength = max(max(robot.Link.d),max(robot.Link.a)); // the longest dimension
 
     // of all a's and d's
     // variables
@@ -83,18 +84,19 @@ function [T] = _Plot_Robot (robot,q,varargin)
     Ob = Tb(1:3,4);    // base position
     Tt = robot.tool;
     Rt = Tt(1:3,1:3);
-    L=robot.Link;
-    nlinks=size(L,1);    // number of links 
-    if nlinks~=size(q,2) then
+    L = robot.Link;
+    nlinks = size(L,1);    // number of links 
+    if nlinks ~= size(q,2) then
           error("Numbers of links and joint variables do not match.")
     end 
-    A=Link2AT(L,q);
+    
+    A = Link2AT(L,q);
     Ti = zeros(4,4,nlinks+2);
     Ri = zeros(3,3,nlinks+2);
     di = zeros(3,1,nlinks+2);
-    Ti(:,:,1)=Tb;
-    Ri(:,:,1)= Rb;
-    di(:,1)=Ob;
+    Ti(:,:,1) = Tb;
+    Ri(:,:,1) = Rb;
+    di(:,1) = Ob;
     //Ti(:,:,1)=A(:,:,1);
     //Ri(:,:,1)=Ti(1:3,1:3,1);    // orientation of joint 1
     //di(:,1)=Ti(1:3,4,1);        // location of joint 1
@@ -332,16 +334,12 @@ function [T] = _Plot_Robot (robot,q,varargin)
     end    
 
     // adjust margin to bounds
-
-
-
     xmin = xmin - bmargin;
     xmax = xmax + bmargin;
     ymin = ymin - bmargin;
     ymax = ymax + bmargin;
     zmin = zmin - bmargin;
     zmax = zmax + bmargin;
-
 
     // Axes settings
     xlabel("x",'fontsize',2);
@@ -364,10 +362,50 @@ function [T] = _Plot_Robot (robot,q,varargin)
     if ShowGrid==1 xgrid;
     end    
 
-    T=Ti(:,:,nlinks+2);    // return homogeneous matrix from base to tool
-    T=clean(T);    
+    T = Ti(:,:,nlinks+2);    // return homogeneous matrix from base to tool
+    T = clean(T);    
 
 endfunction 
+
+// ---------------------------------------------------------------------
+
+function [Hdl] = plotJointR (Radius,Height,di,Ri,SideCount)
+
+    vertexData = GeoVerMakeCylinder(di(:,i)',Ri(:,:,i),Radius,Height,SideCount);
+    [Xs,Ys,Zs,Xb,Yb,Zb] = GeoPatMakeCylinder(vertexData);
+
+    // Draw side patches
+    plot3d(Xs,Ys,Zs);
+    hs_fac3d(i) = gce();
+    hs_fac3d(i).color_mode = 4;
+    hs_fac3d(i).foreground = 1;
+    hs_fac3d(i).hiddencolor = 5;
+
+    // Draw bottom patches
+    plot3d(Xb,Yb,Zb);
+    hb_fac3d(i) = gce();
+    hb_fac3d(i).color_mode = 4;
+    hb_fac3d(i).foreground = 1;
+    hb_fac3d(i).hiddencolor = 5;
+
+endfunction
+
+function [Hdl] = plotJointP (L,di,Ri)
+
+    Lx = L(1);
+    Ly = L(1);
+    Lz = L(1);
+    
+    vertexData = GeoVerMakeBlock(di(:,i)',Ri(:,:,i),[Lx,Ly,Lz]);
+    [X,Y,Z] = GeoPatMakeBlock(vertexData);
+    
+    plot3d(X,Y,Z);
+    h_fac3d(i) = gce();
+    h_fac3d(i).color_mode = 4;
+    h_fac3d(i).foreground = 1;
+    h_fac3d(i).hiddencolor = 4;
+   
+endfunction
 
 // ---------------------------------------------------------------------
 

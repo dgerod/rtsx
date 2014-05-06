@@ -4,20 +4,20 @@
 // Demostration of RPR robot
 // =============================================================================
 
-mprintf("=========== RPR demonstration - Start =======");
+mprintf("=========== RPR demonstration - Start =======\n");
 
-mprintf("Creating robot model and joint sequence...");
-exec(RTSX_ROOT + 'models/mdl_ex1.sce',-1);
+mprintf("Creating robot model and joint sequence...\n");
+exec(RTSX_ROOT + 'models/ex1_mdl.sce',-1);
 exec(RTSX_ROOT + 'models/ex1_genqs2.sce',-1);
 
 figure("figure_name","Robot model");
-PlotRobot(ex1_robot,q0,'figure',gcf());
+PlotRobot(ex1_robot,q0,'figure',get(gcf(),"figure_id"),'hold');
 figure("figure_name","Robot frames");
-PlotRobotFrame(ex1_robot,q0,'figure',gcf());
+PlotRobotFrame(ex1_robot,q0,'figure',get(gcf(),"figure_id"),'hold');
 
 figure("figure_name","Movements");
-AnimateRobot(ex1_robot,qs,'figure',gcf());
+AnimateRobot(ex1_robot,qs,'figure',get(gcf(),"figure_id"),'hold');
 
-mprintf("=========== RPR demonstration - End =======");
+mprintf("=========== RPR demonstration - End =======\n");
 
 // =============================================================================

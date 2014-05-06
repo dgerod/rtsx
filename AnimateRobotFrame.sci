@@ -15,10 +15,8 @@ function _Animate_Robot_Frame (robot,q,varargin)
 
     // Check if inputs are variable or not ---
     if argn(2) > 2 then        
-        varargin = varargin($);
         varnum = length(varargin);
     else
-        varargin = [];
         varnum = 0;
     end
     // ---

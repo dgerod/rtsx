@@ -5,9 +5,13 @@
 // Script that initialize the RTSX toolbox
 // =======================================================================================
 
-mprintf("Robotics Tools for Scilab/Xcos (RTSX) Version 1.01");
-mprintf("by Control Systems Lab,  February 2014");
-mprintf("http://www.controlsystemslab.com/rtsx");
+mprintf("\n");
+mprintf("=====================================\n");
+mprintf("Robotics Tools for Scilab/Xcos (RTSX)\n");
+mprintf("       Control Systems Lab           \n");
+mprintf("    Version 1.01-b - April 2014      \n");
+mprintf("http://www.controlsystemslab.com/rtsx\n");
+mprintf("=====================================\n");
 
 // Get root path of the toolbox
 RTSX_ROOT = get_absolute_file_path( "startup_rtsx.sce" );

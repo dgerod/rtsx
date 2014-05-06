@@ -14,10 +14,8 @@ function [T] = _Plot_Robot_Frame (robot,q,varargin)
          
     // Check if inputs are variable or not ---
     if argn(2) > 2 then        
-        varargin = varargin($);
         varnum = length(varargin);
     else
-        varargin = [];
         varnum = 0;
     end
     // ---
@@ -228,6 +226,7 @@ function [T] = _Plot_Robot_Frame (robot,q,varargin)
 
             xstring(0.5,0.5,zttext);
             zpos = get("hdl");
+
             zpos.font_foreground = font_color;
             zpos.data = [axisX(2,3),axisY(2,3),axisZ(2,3)];
 

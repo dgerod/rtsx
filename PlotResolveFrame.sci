@@ -8,10 +8,8 @@ function [T_rel,T_abs,kc1] = _Plot_Resolve_Frame (kc1,kc2, varargin)
 
     // Check if inputs are variable or not ---
     if argn(2) > 1 then        
-        varargin = varargin($);
         varnum = length(varargin);
     else
-        varargin = [];
         varnum = 0;
     end
     // ---
