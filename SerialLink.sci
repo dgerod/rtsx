@@ -27,7 +27,7 @@ function rm = _Serial_Link (L,varargin)
      
      sdhflag = 0;        // flag for stdDH
      mdhflag = 0;        // flag for modDH
-     nlinks=size(L,1);   // number of links
+     nlinks = size(L,1);   // number of links
      rm.nj = nlinks;     // number of joints
      rm.mdh = 0;         // default to stdDH
      rm.conf = '';       // joint configuration string

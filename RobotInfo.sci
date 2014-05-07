@@ -1,5 +1,5 @@
 // =====================================================================
-// robotinfo.sci  displays information of a robott 
+// robotinfo.sci  displays information of a robot 
 // www.controlsystemslab.com   July 2012
 // =====================================================================
 

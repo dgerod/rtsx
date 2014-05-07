@@ -15,7 +15,8 @@ mprintf("=====================================\n");
 
 // Get root path of the toolbox
 RTSX_ROOT = get_absolute_file_path( "startup_rtsx.sce" );
-RTSX_DEMOS = RTSX_ROOT + 'demos';
+RTSX_DEMOS = RTSX_ROOT + "demos";
+RTSX_TESTS = RTSX_ROOT + "tests";
 
 // ============== common constants ================
 
@@ -29,7 +30,7 @@ True = (1==1);
 // ============== all functions ===================
 
 prot = funcprot(0);  
-exec( RTSX_ROOT +"/load_functions.sce",-1 );
+exec( RTSX_ROOT + "load_functions.sce",-1 );
 funcprot(prot);
 
 // =======================================================================================
