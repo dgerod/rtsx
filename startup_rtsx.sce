@@ -29,6 +29,8 @@ True = (1==1);
 
 // ============== all functions ===================
 
+load3rdPartyOn = %f;
+
 prot = funcprot(0);  
 exec( RTSX_ROOT + "load_functions.sce",-1 );
 funcprot(prot);

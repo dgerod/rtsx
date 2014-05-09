@@ -101,7 +101,9 @@ exec(RTSX_ROOT + 'common/display.sci',-1);
 exec(RTSX_ROOT + 'common/cross.sci',-1);  // cross product
 
 // =================== 3rd party functions ==========================
-exec(RTSX_ROOT + '3rdparty/loader.sce',-1);
+if load3rdPartyOn == %t then
+    exec(RTSX_ROOT + '3rdparty/loader.sce',-1);
+end
 
 // =======================================================================================
 
