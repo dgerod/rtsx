@@ -1,4 +1,4 @@
-//mdl_cylindrical.sce  cylindrical robot
+// mdl_cylindrical.sce  cylindrical robot
 // This file creates a cylindrical (RPP) robot 
 // www.controlsystemslab.com   October 2012
 
