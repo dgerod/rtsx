@@ -1,9 +1,9 @@
 // =====================================================================
-// FKine.sci  computes forward kinematics of a robot
+// FKine.sci - Computes direct/forward kinematics of a robot
 // www.controlsystemslab.com   July 2012
 // =====================================================================
 
-function T = FKine (robot,q)
+function T = _fkine (robot,q)
 // Usage T = FKine(robot,q) where robo is a robot structure created
 // by SerialLink(), and q is a joint variable vector
 // FKine() simply calls Link2AT()
@@ -27,8 +27,9 @@ endfunction
 
 // ---------------------------------------------------------------------
 
-fkine = FKine;
-fwdkinem = FKine;
-dirkinem = FKine;
+FKine = _fkine;
+fkine = _fkine;
+dirkinem = _fkine;
+fwdkinem = _fkine;
 
 // =====================================================================

@@ -1,7 +1,6 @@
 // =====================================================================
-// ikine3.sci   Inverse kinematics for 3-axis robot with no wrist
+// IKine3.sci - Inverse/reverse kinematics for 3-axis robot with no wrist
 // www.controlsystemslab.com   August 2012
-
 // =====================================================================
 
 function q = _ikine3 (robot, T, varargin)
@@ -173,5 +172,6 @@ endfunction
 IKine = _ikine3;
 ikine3 = _ikine3;
 invkinem3 = _ikine3;
+revkinem3 = _ikine3;
 
 // =====================================================================

@@ -1,6 +1,6 @@
 // =====================================================================
-// ikine6s.sci   Inverse kinematics for 6-axis robot with spherical wrist
-// www.controlsystemslab.com   August 2012
+// ikine6s.sci - Inverse/reverse kinematics for 6-axis robot with spherical wrist
+// www.controlsystemslab.com - August 2012
 // =====================================================================
 
 function q = _ikine6s (robot, T, varargin)
@@ -240,5 +240,6 @@ endfunction
 IKine6s = _ikine6s;
 ikine6s = _ikine6s;
 invkinem6s = _ikine6s;
+revkinem6s = _ikine6s;
 
 // =====================================================================

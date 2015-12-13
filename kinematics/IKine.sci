@@ -1,6 +1,7 @@
-// ikine.sci   Inverse mainipulator kinematics
-// www.controlsystemslab.com  August 2012
-//
+// =====================================================================
+// IKine.sci - Inverse/reverse mainipulator kinematics
+// www.controlsystemslab.com - August 2012
+// ---------------------------------------------------------------------
 // q = ikine(robot,T) is the joint coordinates corresponding to the robot 
 // end-effector pose T which is a homogenenous transform.
 //
@@ -63,14 +64,8 @@
 // This function is adapted from The Robotics Toolbox for Matlab (RTB).
 // Copyright (C) 1993-2011, by Peter I. Corke 
 // http://www.petercorke.com
+// =====================================================================
 
-function [qt, histout]=IKine(robot, tr, varargin)
-    [qt,histout]=_ikine(robot, tr, varargin);
-endfunction
-
-function [qt, histout]=ikine(robot, tr, varargin)
-    [qt, histout]=_ikine(robot, tr, varargin);
-endfunction
 
 function [qt,histout] = _ikine(robot, tr, varargin)
     varargin = varargin($);
@@ -334,3 +329,12 @@ function [qt,histout] = _ikine(robot, tr, varargin)
     end
     printf('\n');
 endfunction
+
+// ---------------------------------------------------------------------
+
+IKine = _ikine;
+ikine = _ikine;
+invkinem = _ikine;
+revkinem = _ikine;
+
+// =====================================================================
