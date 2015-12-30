@@ -3,7 +3,7 @@
 // ============================================================================
 
 // Kinematics parameters (rf,lf,le,re)
-[ret,kp] = d3rLoadKinemConfig( "MicroDELTA-240" );
+[ret,kp] = d3rLoadKinemConfig("MicroDELTA-240");
 // Position to solve
 p1 = [0,10,-170]';
 
@@ -21,7 +21,7 @@ mprintf( "joints = %f,%f,%f\n\n",joints(1),joints(2),joints(3));
 
 mprintf( "joints = %f,%f,%f\n",joints(1),joints(2),joints(3));
 mprintf( "joints --> [DK] --> tcp0\n");
-[ret,p2] = d3rDirKinem( kp,joints )
+[ret,p2] = d3rDirKinem(kp, joints)
 mprintf( "p2 = %f,%f,%f\n",p2(1),p2(2),p2(3) );
 
 // ============================================================================
