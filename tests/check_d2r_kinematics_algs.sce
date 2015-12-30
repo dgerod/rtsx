@@ -3,7 +3,7 @@
 // ============================================================================
 
 // Kinematics parameters (rf,lf,le,re)
-[ret,kp] = d2rLoadKinemConfig( "UG-D2" );
+exec(RTSX_ROOT + 'models/delta2_cugd2_mdl.sce',-1);
 // Position to solve
 p1 = [50,0,-700]';
 

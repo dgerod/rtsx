@@ -3,7 +3,7 @@
 // ============================================================================
 
 // Kinematics parameters (rf,lf,le,re)
-[ret,kp] = d3rLoadKinemConfig("MicroDELTA-240");
+exec(RTSX_ROOT + 'models/delta3_m240_mdl.sce',-1);
 // Position to solve
 p1 = [0,10,-170]';
 
