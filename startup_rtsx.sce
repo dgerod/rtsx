@@ -23,16 +23,16 @@ RTSX_TESTS = RTSX_ROOT + "tests";
 pi = %pi;
 false = 0;
 true = 1;
-// boolean
-False = (1==0);
-True = (1==1);
+False = %f;
+True = %t;
 
 // ============== all functions ===================
 
+// Activate/deactivate external dependencies
 load3rdPartyOn = %f;
-
+// Load the functions
 prot = funcprot(0);  
-exec( RTSX_ROOT + "load_functions.sce",-1 );
+exec(RTSX_ROOT + "load_functions.sce", -1);
 funcprot(prot);
 
 // =======================================================================================

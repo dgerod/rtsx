@@ -29,6 +29,7 @@ function [T] = _Plot_Robot (robot,q,varargin)
     lcolor = 2;  // default link color = blue
     llstyle = 1;  // default link style = solid
     dlstyle = 1; // default to solid
+    
     for iv =1:varnum
         
         if type(varargin(iv)) == 10 then  // string
@@ -190,37 +191,15 @@ function [T] = _Plot_Robot (robot,q,varargin)
             
             if L(i).RP=='R' then  // revolute joint
                 JAxisLength = 1.4*Height;
-                VertexData = GeoVerMakeCylinder(di(:,i)',Ri(:,:,i),Radius,Height,SideCount);
-                [Xs,Ys,Zs,Xb,Yb,Zb] = GeoPatMakeCylinder(VertexData);
-                // Draw side patches
-                figure(fnum);
-                plot3d(Xs,Ys,Zs);
-                hs_fac3d(i) = gce();
-                hs_fac3d(i).color_mode = 4;
-                hs_fac3d(i).foreground = 1;
-                hs_fac3d(i).hiddencolor = 5;
-                // Draw bottom patches
-                figure(fnum);
-                plot3d(Xb,Yb,Zb);
-                hb_fac3d(i) = gce();
-                hb_fac3d(i).color_mode = 4;
-                hb_fac3d(i).foreground = 1;
-                hb_fac3d(i).hiddencolor = 5;
+                [hs_fac3d(i),hb_fac3d(i)] = PlotJointR(Radius,Height,di(:,i)',Ri(:,:,i),SideCount);
 
             elseif L(i).RP == 'P' then // prismatic joint
                 //Lx = 0.2*L(i).d;    // represents joint by rectangular shape
                 //Ly = Lx;
                 //Lz = Lx;
                 JAxisLength = 1.4*Lx;
-                //bmargin = max(bmargin,Lx);
-                VertexData = GeoVerMakeBlock(di(:,i)',Ri(:,:,i),[Lx,Ly,Lz]);
-                [X,Y,Z] = GeoPatMakeBlock(VertexData);
-                figure(fnum);
-                plot3d(X,Y,Z);
-                h_fac3d(i) = gce();
-                h_fac3d(i).color_mode = 4;
-                h_fac3d(i).foreground = 1;
-                h_fac3d(i).hiddencolor = 4;
+                [h_fac3d(i)] = plotJointP([Lx,Ly,Lz],di(:,i)',Ri(:,:,i));
+
             else
                 errstr=sprintf("Invalid joint type at link %d",i);
                 error(errstr);
