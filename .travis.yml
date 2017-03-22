@@ -1,0 +1,9 @@
+language: cpp
+os:
+  - linux
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install scilab 
+script:
+  - scilab -nw -e 'result = exec("execute_tests.sce", "errcatch"); exit(result)'
+  
