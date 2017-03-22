@@ -1,4 +1,4 @@
-Robotics Tools for Scilab/Xcos
+Robotics Tools for [Scilab/Xcos](http://www.scilab.org)
 ====
 
 The RTSX (Robotics Tools for Scilab/Xcos) is an open-source software written in Scilab to support robot analysis and control courses. It is distributed in the hope that it will be useful, but without any warranty. And it is released under the GNU General Public License.
